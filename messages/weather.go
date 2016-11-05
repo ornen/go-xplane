@@ -17,16 +17,18 @@
 
 package messages
 
-const (
-	SpeedMessageType            = 3
-	GLoadMessageType            = 4
-	WeatherMessageType          = 6
-	FlightControlMessageType    = 13
-	GearsBrakesMessageType      = 14
-	PitchRollHeadingMessageType = 17
-	LatLonAltMessageType        = 20
-	EngineRPMMessageType        = 37
-	PropRPMMessageType          = 38
-	BatteryAmperageMessageType  = 53
-	BatteryVoltageMessageType   = 54
-)
+type WeatherMessage struct {
+	Pressure    float32
+	Temperature float32
+}
+
+func NewWeatherMessage(data []float32) WeatherMessage {
+	return WeatherMessage{
+		Pressure:    data[0],
+		Temperature: data[1],
+	}
+}
+
+func (m WeatherMessage) Type() uint {
+	return WeatherMessageType
+}

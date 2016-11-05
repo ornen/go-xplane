@@ -17,16 +17,31 @@
 
 package messages
 
-const (
-	SpeedMessageType            = 3
-	GLoadMessageType            = 4
-	WeatherMessageType          = 6
-	FlightControlMessageType    = 13
-	GearsBrakesMessageType      = 14
-	PitchRollHeadingMessageType = 17
-	LatLonAltMessageType        = 20
-	EngineRPMMessageType        = 37
-	PropRPMMessageType          = 38
-	BatteryAmperageMessageType  = 53
-	BatteryVoltageMessageType   = 54
-)
+type GearsBrakesMessage struct {
+	Gears  float32
+	Brakes float32
+}
+
+func NewGearsBrakesMessage(data []float32) GearsBrakesMessage {
+	return GearsBrakesMessage{
+		Gears:  data[0],
+		Brakes: data[0],
+	}
+}
+
+func (c GearsBrakesMessage) Type() uint {
+	return GearsBrakesMessageType
+}
+
+func (c GearsBrakesMessage) Data() [8]float32 {
+	return [8]float32{
+		c.Gears,
+		c.Brakes,
+		-999,
+		-999,
+		-999,
+		-999,
+		-999,
+		-999,
+	}
+}
