@@ -21,7 +21,7 @@ const (
 	SpeedMessageType            = 3
 	GLoadMessageType            = 4
 	WeatherMessageType          = 6
-	FlightControlMessageType    = 13
+	FlightControlMessageType    = 11
 	GearsBrakesMessageType      = 14
 	PitchRollHeadingMessageType = 17
 	LatLonAltMessageType        = 20

@@ -18,16 +18,16 @@
 package messages
 
 type GLoadMessage struct {
-	X float32
-	Y float32
-	Z float32
+	X float64
+	Y float64
+	Z float64
 }
 
 func NewGLoadMessage(data []float32) GLoadMessage {
 	return GLoadMessage{
-		X: data[5] * gravityInMetersPerSecondSecond,
-		Y: data[6] * gravityInMetersPerSecondSecond,
-		Z: -data[4] * gravityInMetersPerSecondSecond,
+		X: float64(data[5]) * gravityInMetersPerSecondSecond,
+		Y: float64(data[6]) * gravityInMetersPerSecondSecond,
+		Z: -float64(data[4]) * gravityInMetersPerSecondSecond,
 	}
 }
 

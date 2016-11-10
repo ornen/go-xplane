@@ -18,20 +18,20 @@
 package messages
 
 type LatLonAltMessage struct {
-	Latitude          float32
-	Longitude         float32
-	AltitudeMSL       float32
-	AltitudeAGL       float32
-	AltitudeIndicated float32
+	Latitude          float64
+	Longitude         float64
+	AltitudeMSL       float64
+	AltitudeAGL       float64
+	AltitudeIndicated float64
 }
 
 func NewLatLonAltMessage(data []float32) LatLonAltMessage {
 	return LatLonAltMessage{
-		Latitude:          data[0],
-		Longitude:         data[1],
-		AltitudeMSL:       data[2] * feetToMeters,
-		AltitudeAGL:       data[3] * feetToMeters,
-		AltitudeIndicated: data[5] * feetToMeters,
+		Latitude:          float64(data[0]),
+		Longitude:         float64(data[1]),
+		AltitudeMSL:       float64(data[2]) * feetToMeters,
+		AltitudeAGL:       float64(data[3]) * feetToMeters,
+		AltitudeIndicated: float64(data[5]) * feetToMeters,
 	}
 }
 

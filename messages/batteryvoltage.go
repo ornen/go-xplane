@@ -18,12 +18,12 @@
 package messages
 
 type BatteryVoltageMessage struct {
-	Voltage float32
+	Voltage float64
 }
 
 func NewBatteryVoltageMessage(data []float32) BatteryVoltageMessage {
 	return BatteryVoltageMessage{
-		Voltage: data[0],
+		Voltage: float64(data[0]),
 	}
 }
 

@@ -18,12 +18,12 @@
 package messages
 
 type BatteryAmperageMessage struct {
-	Amperage float32
+	Amperage float64
 }
 
 func NewBatteryAmperageMessage(data []float32) BatteryAmperageMessage {
 	return BatteryAmperageMessage{
-		Amperage: data[0],
+		Amperage: float64(data[0]),
 	}
 }
 

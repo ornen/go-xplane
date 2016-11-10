@@ -18,12 +18,12 @@
 package messages
 
 type PropRPMMessage struct {
-	RPM float32
+	RPM float64
 }
 
 func NewPropRPMMessage(data []float32) PropRPMMessage {
 	return PropRPMMessage{
-		RPM: data[0],
+		RPM: float64(data[0]),
 	}
 }
 

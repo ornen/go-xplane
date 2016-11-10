@@ -18,18 +18,18 @@
 package messages
 
 type SpeedMessage struct {
-	IndicatedSpeed float32
-	Airspeed       float32
-	TrueAirspeed   float32
-	GroundSpeed    float32
+	IndicatedSpeed float64
+	Airspeed       float64
+	TrueAirspeed   float64
+	GroundSpeed    float64
 }
 
 func NewSpeedMessage(data []float32) SpeedMessage {
 	return SpeedMessage{
-		IndicatedSpeed: data[0] * knotsToMetersPerSecond,
-		Airspeed:       data[1] * knotsToMetersPerSecond,
-		TrueAirspeed:   data[2] * knotsToMetersPerSecond,
-		GroundSpeed:    data[3] * knotsToMetersPerSecond,
+		IndicatedSpeed: float64(data[0]) * knotsToMetersPerSecond,
+		Airspeed:       float64(data[1]) * knotsToMetersPerSecond,
+		TrueAirspeed:   float64(data[2]) * knotsToMetersPerSecond,
+		GroundSpeed:    float64(data[3]) * knotsToMetersPerSecond,
 	}
 }
 

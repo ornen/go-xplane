@@ -18,12 +18,12 @@
 package messages
 
 type EngineRPMMessage struct {
-	RPM float32
+	RPM float64
 }
 
 func NewEngineRPMMessage(data []float32) EngineRPMMessage {
 	return EngineRPMMessage{
-		RPM: data[0],
+		RPM: float64(data[0]),
 	}
 }
 

@@ -18,14 +18,14 @@
 package messages
 
 type WeatherMessage struct {
-	Pressure    float32
-	Temperature float32
+	Pressure    float64
+	Temperature float64
 }
 
 func NewWeatherMessage(data []float32) WeatherMessage {
 	return WeatherMessage{
-		Pressure:    data[0],
-		Temperature: data[1],
+		Pressure:    float64(data[0]),
+		Temperature: float64(data[1]),
 	}
 }
 

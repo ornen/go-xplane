@@ -22,16 +22,16 @@ const (
 )
 
 type AngularVelocitiesMessage struct {
-	X float32
-	Y float32
-	Z float32
+	X float64
+	Y float64
+	Z float64
 }
 
 func NewAngularVelocitiesMessage(data []float32) AngularVelocitiesMessage {
 	return AngularVelocitiesMessage{
-		X: data[1],
-		Y: data[0],
-		Z: data[2],
+		X: float64(data[1]),
+		Y: float64(data[0]),
+		Z: float64(data[2]),
 	}
 }
 

@@ -22,7 +22,7 @@ const (
 )
 
 type ThrottleCommandMessage struct {
-	Throttle float32
+	Throttle float64
 }
 
 func (c ThrottleCommandMessage) Type() uint {
@@ -31,10 +31,10 @@ func (c ThrottleCommandMessage) Type() uint {
 
 func (c ThrottleCommandMessage) Data() [8]float32 {
 	return [8]float32{
-		c.Throttle,
-		c.Throttle,
-		c.Throttle,
-		c.Throttle,
+		float32(c.Throttle),
+		float32(c.Throttle),
+		float32(c.Throttle),
+		float32(c.Throttle),
 		-999,
 		-999,
 		-999,
