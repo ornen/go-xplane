@@ -18,9 +18,17 @@
 package messages
 
 type FlightControlMessage struct {
-	Elevator float32
-	Aileron  float32
-	Rudder   float32
+	Elevator float64
+	Aileron  float64
+	Rudder   float64
+}
+
+func NewFlightControlMessage(data []float32) FlightControlMessage {
+	return FlightControlMessage{
+		Elevator: float64(data[0]),
+		Aileron:  float64(data[1]),
+		Rudder:   float64(data[2]),
+	}
 }
 
 func (c FlightControlMessage) Type() uint {
@@ -29,11 +37,11 @@ func (c FlightControlMessage) Type() uint {
 
 func (c FlightControlMessage) Data() [8]float32 {
 	return [8]float32{
-		c.Elevator,
-		c.Aileron,
-		c.Rudder,
+		float32(c.Elevator),
+		float32(c.Aileron),
+		float32(c.Rudder),
 		-999,
-		c.Rudder,
+		float32(c.Rudder),
 		-999,
 		-999,
 		-999,
