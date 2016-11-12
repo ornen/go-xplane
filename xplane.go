@@ -98,6 +98,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewEngineRPMMessage(messageData)
 	case messages.PropRPMMessageType:
 		x.Messages <- messages.NewPropRPMMessage(messageData)
+	case messages.PropPitchMessageType:
+		x.Messages <- messages.NewPropPitchMessage(messageData)
 	default:
 		log.Println("Unknown message type: ", messageType)
 	}
