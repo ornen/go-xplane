@@ -15,17 +15,17 @@
 package messages
 
 const (
-	SpeedMessageType            = 3
-	GLoadMessageType            = 4
-	WeatherMessageType          = 6
-	FlightControlMessageType    = 11
-	GearsBrakesMessageType      = 14
-	PitchRollHeadingMessageType = 17
-	LatLonAltMessageType        = 20
+	SpeedMessageType              = 3
+	GLoadMessageType              = 4
+	WeatherMessageType            = 6
+	FlightControlMessageType      = 11
+	GearsBrakesMessageType        = 14
+	PitchRollHeadingMessageType   = 17
+	LatLonAltMessageType          = 20
 	LocVelDistTraveledMessageType = 21
-	EngineRPMMessageType        = 37
-	PropRPMMessageType          = 38
-	PropPitchMessageType        = 39
-	BatteryAmperageMessageType  = 53
-	BatteryVoltageMessageType   = 54
+	EngineRPMMessageType          = 37
+	PropRPMMessageType            = 38
+	PropPitchMessageType          = 39
+	BatteryAmperageMessageType    = 53
+	BatteryVoltageMessageType     = 54
 )
