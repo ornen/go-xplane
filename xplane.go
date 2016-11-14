@@ -90,6 +90,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewWeatherMessage(messageData)
 	case messages.LatLonAltMessageType:
 		x.Messages <- messages.NewLatLonAltMessage(messageData)
+	case messages.LocVelDistTraveledMessageType:
+		x.Messages <- messages.NewLocVelDistTraveledMessage(messageData)
 	case messages.BatteryAmperageMessageType:
 		x.Messages <- messages.NewBatteryAmperageMessage(messageData)
 	case messages.BatteryVoltageMessageType:
