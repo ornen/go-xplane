@@ -2,10 +2,6 @@
 
 This is an interface to X-Plane for Golang. The interface is functional and supports the basics, but does not cover all messages supported by X-Plane yet. Pull-requests are welcome.
 
-## License
-
-This code is licensed under the Apache License 2.0.
-
 ## Example
 ```go
 package main
@@ -41,3 +37,7 @@ func main() {
         }
 }
 ```
+
+## License
+
+This code is licensed under the Apache License 2.0.
