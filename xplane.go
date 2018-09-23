@@ -21,6 +21,7 @@ import (
 	"github.com/ornen/go-xplane/messages"
 	"log"
 	"net"
+	"time"
 )
 
 const (
@@ -33,13 +34,28 @@ type XPlane struct {
 	LocalAddress  string
 	Messages      chan Message
 	connection    *net.UDPConn
+	receivePeriod *time.Duration
 }
 
-func New(remoteAddress, localAddress string) XPlane {
-	return XPlane{
+type Opt func(*XPlane)
+
+func New(remoteAddress, localAddress string, opts ...Opt) XPlane {
+	x := XPlane{
 		RemoteAddress: remoteAddress,
 		LocalAddress:  localAddress,
 		Messages:      make(chan Message),
+	}
+
+	for _, o := range opts {
+		o(&x)
+	}
+
+	return x
+}
+
+func ReceiveEvery(t time.Duration) Opt {
+	return func( x *XPlane) {
+		x.receivePeriod = &t
 	}
 }
 
@@ -54,15 +70,29 @@ func (x *XPlane) Receive() {
 	defer serverConn.Close()
 
 	buf := make([]byte, 1024)
-
-	for {
-		n, _, _ := serverConn.ReadFromUDP(buf)
-		m := (n - datagramPrefixLength) / messageLength
-
-		for i := 0; i < m; i++ {
-			sentence := buf[datagramPrefixLength+i*messageLength : datagramPrefixLength+(i+1)*messageLength]
-			x.parse(sentence)
+	if x.receivePeriod != nil {
+		t := time.NewTicker(*x.receivePeriod)
+		for {
+			select {
+				case <-t.C:
+					x.readBuf(serverConn, buf)
+			}
 		}
+	} else {
+		for {
+			x.readBuf(serverConn, buf)
+		}
+	}
+}
+
+
+func(x *XPlane) readBuf(c *net.UDPConn, b []byte) {
+	n, _, _ := c.ReadFromUDP(b)
+	m := (n - datagramPrefixLength) / messageLength
+
+	for i := 0; i < m; i++ {
+		sentence := b[datagramPrefixLength+i*messageLength : datagramPrefixLength+(i+1)*messageLength]
+		x.parse(sentence)
 	}
 }
 
