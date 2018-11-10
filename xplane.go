@@ -17,11 +17,12 @@ package xplane
 import (
 	"bytes"
 	"encoding/binary"
-	"fmt"
-	"github.com/ornen/go-xplane/messages"
+	"errors"
 	"log"
 	"net"
 	"time"
+
+	"github.com/ornen/go-xplane/messages"
 )
 
 const (
@@ -54,17 +55,17 @@ func New(remoteAddress, localAddress string, opts ...Opt) XPlane {
 }
 
 func ReceiveEvery(t time.Duration) Opt {
-	return func( x *XPlane) {
+	return func(x *XPlane) {
 		x.receivePeriod = &t
 	}
 }
 
-func (x *XPlane) Receive() {
+func (x *XPlane) Receive() error {
 	serverAddr, err := net.ResolveUDPAddr("udp", x.LocalAddress)
 	serverConn, err := net.ListenUDP("udp", serverAddr)
 
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	defer serverConn.Close()
@@ -74,8 +75,8 @@ func (x *XPlane) Receive() {
 		t := time.NewTicker(*x.receivePeriod)
 		for {
 			select {
-				case <-t.C:
-					x.readBuf(serverConn, buf)
+			case <-t.C:
+				x.readBuf(serverConn, buf)
 			}
 		}
 	} else {
@@ -83,10 +84,11 @@ func (x *XPlane) Receive() {
 			x.readBuf(serverConn, buf)
 		}
 	}
+
+	return nil
 }
 
-
-func(x *XPlane) readBuf(c *net.UDPConn, b []byte) {
+func (x *XPlane) readBuf(c *net.UDPConn, b []byte) {
 	n, _, _ := c.ReadFromUDP(b)
 	m := (n - datagramPrefixLength) / messageLength
 
@@ -137,18 +139,18 @@ func (x *XPlane) parse(sentence []byte) {
 	}
 }
 
-func (x *XPlane) Connect() {
+func (x *XPlane) Connect() error {
 	udpAddr, err := net.ResolveUDPAddr("udp", x.RemoteAddress)
-
 	if err != nil {
-		fmt.Println("Wrong address!")
-		return
+		return errors.New("wrong address!")
 	}
 
 	x.connection, err = net.DialUDP("udp", nil, udpAddr)
+
+	return err
 }
 
-func (x *XPlane) Send(command Command) {
+func (x *XPlane) Send(command Command) error {
 	commandData := command.Data()
 
 	buf := new(bytes.Buffer)
@@ -157,9 +159,10 @@ func (x *XPlane) Send(command Command) {
 	buf.Write([]byte{byte(command.Type()), 0, 0, 0})
 
 	if err := binary.Write(buf, binary.LittleEndian, &commandData); err != nil {
-		fmt.Println(err)
-		return
+		return err
 	}
 
-	x.connection.Write(buf.Bytes())
+	_, err := x.connection.Write(buf.Bytes())
+
+	return err
 }
