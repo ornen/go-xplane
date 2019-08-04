@@ -1,6 +1,6 @@
 # go-xplane
 
-This is an interface to X-Plane for Golang. The interface is functional and supports the basics, but does not cover all messages supported by X-Plane yet. Pull-requests are welcome.
+This is an interface to X-Plane for Go. The interface is functional and supports the basics, but does not cover all messages supported by X-Plane yet. Pull-requests are welcome.
 
 ## Example
 ```go
