@@ -134,6 +134,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewPropRPMMessage(messageData)
 	case messages.PropPitchMessageType:
 		x.Messages <- messages.NewPropPitchMessage(messageData)
+	case messages.AngleOfAttackSideslipMessageType:
+		x.Messages <- messages.NewAngleOfAttackSideslipMessage(messageData)
 	default:
 		log.Println("Unknown message type: ", messageType)
 	}
