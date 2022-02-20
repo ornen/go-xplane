@@ -15,19 +15,27 @@
 package messages
 
 const (
-	SpeedMessageType              = 3
-	GLoadMessageType              = 4
-	WeatherMessageType            = 6
-	FlightControlMessageType      = 11
-	TrimFlapsBrakesMessageType    = 13
-	GearsBrakesMessageType        = 14
-	PitchRollHeadingMessageType   = 17
-	LatLonAltMessageType          = 20
-	LocVelDistTraveledMessageType = 21
-	EngineRPMMessageType          = 37
-	PropRPMMessageType            = 38
-	PropPitchMessageType          = 39
-	BatteryAmperageMessageType    = 53
-	BatteryVoltageMessageType     = 54
 	AngleOfAttackSideslipMessageType = 18
 )
+
+type AngleOfAttackSideslipMessage struct {
+	Alpha float64
+	Beta float64
+	HPath float64
+	VPath float64
+	Slip float64
+}
+
+func NewAngleOfAttackSideslipMessage(data []float32) AngleOfAttackSideslipMessage {
+	return AngleOfAttackSideslipMessage{
+		Alpha: float64(data[0]),
+		Beta: float64(data[1]),
+		HPath: float64(data[2]),
+		VPath: float64(data[3]),
+		Slip: float64(data[4]),
+	}
+}
+
+func (m AngleOfAttackSideslipMessage) Type() uint {
+	return AngleOfAttackSideslipMessageType
+}
