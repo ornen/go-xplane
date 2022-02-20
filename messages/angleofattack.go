@@ -14,10 +14,6 @@
 
 package messages
 
-const (
-	AngleOfAttackSideslipMessageType = 18
-)
-
 type AngleOfAttackSideslipMessage struct {
 	Alpha float64
 	Beta float64
