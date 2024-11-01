@@ -112,6 +112,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewAircraftPointWeatherTempPress(messageData)
 	case messages.AircraftRunwayConditionsType:
 		x.Messages <- messages.NewAircraftRunwayConditions(messageData)
+	case messages.EnginePowerType:
+		x.Messages <- messages.NewEnginePower(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
