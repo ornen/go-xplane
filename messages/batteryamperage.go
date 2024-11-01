@@ -15,15 +15,18 @@
 package messages
 
 type BatteryAmperageMessage struct {
+	MessageData
 	Amperage float64
 }
 
 func NewBatteryAmperageMessage(data []float32) BatteryAmperageMessage {
 	return BatteryAmperageMessage{
-		Amperage: float64(data[0]),
+		MessageData: MessageData{Name: "BatteryAmperage"},
+		Amperage:    float64(data[0]),
 	}
 }
 
 func (m BatteryAmperageMessage) Type() uint {
 	return BatteryAmperageMessageType
 }
+func (m BatteryAmperageMessage) GetName() string { return m.Name }

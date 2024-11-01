@@ -15,23 +15,26 @@
 package messages
 
 type AngleOfAttackSideslipMessage struct {
+	MessageData
 	Alpha float64
-	Beta float64
+	Beta  float64
 	HPath float64
 	VPath float64
-	Slip float64
+	Slip  float64
 }
 
 func NewAngleOfAttackSideslipMessage(data []float32) AngleOfAttackSideslipMessage {
 	return AngleOfAttackSideslipMessage{
-		Alpha: float64(data[0]),
-		Beta: float64(data[1]),
-		HPath: float64(data[2]),
-		VPath: float64(data[3]),
-		Slip: float64(data[4]),
+		MessageData: MessageData{Name: "AngleOfAttackSideslip"},
+		Alpha:       float64(data[0]),
+		Beta:        float64(data[1]),
+		HPath:       float64(data[2]),
+		VPath:       float64(data[3]),
+		Slip:        float64(data[4]),
 	}
 }
 
 func (m AngleOfAttackSideslipMessage) Type() uint {
 	return AngleOfAttackSideslipMessageType
 }
+func (m AngleOfAttackSideslipMessage) GetName() string { return m.Name }

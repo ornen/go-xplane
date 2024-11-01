@@ -15,6 +15,7 @@
 package messages
 
 type LatLonAltMessage struct {
+	MessageData
 	Latitude          float64
 	Longitude         float64
 	AltitudeMSL       float64
@@ -24,6 +25,7 @@ type LatLonAltMessage struct {
 
 func NewLatLonAltMessage(data []float32) LatLonAltMessage {
 	return LatLonAltMessage{
+		MessageData:       MessageData{Name: "LatLonAlt"},
 		Latitude:          float64(data[0]),
 		Longitude:         float64(data[1]),
 		AltitudeMSL:       float64(data[2]) * feetToMeters,
@@ -35,3 +37,5 @@ func NewLatLonAltMessage(data []float32) LatLonAltMessage {
 func (m LatLonAltMessage) Type() uint {
 	return LatLonAltMessageType
 }
+
+func (m LatLonAltMessage) GetName() string { return m.Name }

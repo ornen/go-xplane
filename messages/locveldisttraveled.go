@@ -15,6 +15,7 @@
 package messages
 
 type LocVelDistTraveledMessage struct {
+	MessageData
 	X  float64
 	Y  float64
 	Z  float64
@@ -25,15 +26,18 @@ type LocVelDistTraveledMessage struct {
 
 func NewLocVelDistTraveledMessage(data []float32) LocVelDistTraveledMessage {
 	return LocVelDistTraveledMessage{
-		Y:  float64(data[0]),
-		Z:  -float64(data[1]),
-		X:  -float64(data[2]),
-		Yv: float64(data[3]),
-		Zv: -float64(data[4]),
-		Xv: -float64(data[5]),
+		MessageData: MessageData{Name: "LocVelDistTraveled"},
+		Y:           float64(data[0]),
+		Z:           -float64(data[1]),
+		X:           -float64(data[2]),
+		Yv:          float64(data[3]),
+		Zv:          -float64(data[4]),
+		Xv:          -float64(data[5]),
 	}
 }
 
 func (m LocVelDistTraveledMessage) Type() uint {
 	return LocVelDistTraveledMessageType
 }
+
+func (e LocVelDistTraveledMessage) GetName() string { return e.Name }
