@@ -14,10 +14,6 @@
 
 package messages
 
-const (
-	AngularVelocitiesMessageType = 16
-)
-
 type AngularVelocitiesMessage struct {
 	X float64
 	Y float64
