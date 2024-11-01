@@ -142,6 +142,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewThrottleActual(messageData)
 	case messages.WeightAndBalanceType:
 		x.Messages <- messages.NewWeightAndBalance(messageData)
+	case messages.TrimFlapsBrakesMessageType:
+		x.Messages <- messages.NewTrimFlapsBrakesMessage(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
