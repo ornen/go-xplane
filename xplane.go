@@ -138,6 +138,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewPayloadWeights(messageData)
 	case messages.SimStatsType:
 		x.Messages <- messages.NewSimStats(messageData)
+	case messages.ThrottleActualType:
+		x.Messages <- messages.NewThrottleActual(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
