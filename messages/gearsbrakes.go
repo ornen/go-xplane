@@ -15,20 +15,24 @@
 package messages
 
 type GearsBrakesMessage struct {
+	MessageData
 	Gears  float64
 	Brakes float64
 }
 
 func NewGearsBrakesMessage(data []float32) GearsBrakesMessage {
 	return GearsBrakesMessage{
-		Gears:  float64(data[0]),
-		Brakes: float64(data[0]),
+		MessageData: MessageData{Name: "GearsBrakes"},
+		Gears:       float64(data[0]),
+		Brakes:      float64(data[0]),
 	}
 }
 
 func (c GearsBrakesMessage) Type() uint {
 	return GearsBrakesMessageType
 }
+
+func (c GearsBrakesMessage) GetName() string { return c.Name }
 
 func (c GearsBrakesMessage) Data() [8]float32 {
 	return [8]float32{

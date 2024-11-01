@@ -15,15 +15,18 @@
 package messages
 
 type EngineRPMMessage struct {
+	MessageData
 	RPM float64
 }
 
 func NewEngineRPMMessage(data []float32) EngineRPMMessage {
 	return EngineRPMMessage{
-		RPM: float64(data[0]),
+		MessageData: MessageData{Name: "EngineRPM"},
+		RPM:         float64(data[0]),
 	}
 }
 
 func (m EngineRPMMessage) Type() uint {
 	return EngineRPMMessageType
 }
+func (m EngineRPMMessage) GetName() string { return m.Name }

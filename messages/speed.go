@@ -15,6 +15,7 @@
 package messages
 
 type SpeedMessage struct {
+	MessageData
 	IndicatedSpeed float64
 	Airspeed       float64
 	TrueAirspeed   float64
@@ -23,6 +24,7 @@ type SpeedMessage struct {
 
 func NewSpeedMessage(data []float32) SpeedMessage {
 	return SpeedMessage{
+		MessageData:    MessageData{Name: "Speed"},
 		IndicatedSpeed: float64(data[0]) * knotsToMetersPerSecond,
 		Airspeed:       float64(data[1]) * knotsToMetersPerSecond,
 		TrueAirspeed:   float64(data[2]) * knotsToMetersPerSecond,
@@ -33,3 +35,5 @@ func NewSpeedMessage(data []float32) SpeedMessage {
 func (m SpeedMessage) Type() uint {
 	return SpeedMessageType
 }
+
+func (m SpeedMessage) GetName() string { return m.Name }

@@ -15,12 +15,14 @@
 package messages
 
 type PropPitchMessage struct {
+	MessageData
 	MainRotorPitch float64
 	TailRotorPitch float64
 }
 
 func NewPropPitchMessage(data []float32) PropPitchMessage {
 	return PropPitchMessage{
+		MessageData:    MessageData{Name: "PropPitch"},
 		MainRotorPitch: float64(data[0]),
 		TailRotorPitch: float64(data[1]),
 	}
@@ -29,6 +31,8 @@ func NewPropPitchMessage(data []float32) PropPitchMessage {
 func (m PropPitchMessage) Type() uint {
 	return PropPitchMessageType
 }
+
+func (m PropPitchMessage) GetName() string { return m.Name }
 
 func (c PropPitchMessage) Data() [8]float32 {
 	return [8]float32{

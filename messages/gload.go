@@ -15,6 +15,7 @@
 package messages
 
 type GLoadMessage struct {
+	MessageData
 	X float64
 	Y float64
 	Z float64
@@ -22,12 +23,15 @@ type GLoadMessage struct {
 
 func NewGLoadMessage(data []float32) GLoadMessage {
 	return GLoadMessage{
-		X: float64(data[5]) * gravityInMetersPerSecondSecond,
-		Y: float64(data[6]) * gravityInMetersPerSecondSecond,
-		Z: -float64(data[4]) * gravityInMetersPerSecondSecond,
+		MessageData: MessageData{Name: "GLoad"},
+		X:           float64(data[5]) * gravityInMetersPerSecondSecond,
+		Y:           float64(data[6]) * gravityInMetersPerSecondSecond,
+		Z:           -float64(data[4]) * gravityInMetersPerSecondSecond,
 	}
 }
 
 func (m GLoadMessage) Type() uint {
 	return GLoadMessageType
 }
+
+func (m GLoadMessage) GetName() string { return m.Name }

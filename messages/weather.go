@@ -15,12 +15,14 @@
 package messages
 
 type WeatherMessage struct {
+	MessageData
 	Pressure    float64
 	Temperature float64
 }
 
 func NewWeatherMessage(data []float32) WeatherMessage {
 	return WeatherMessage{
+		MessageData: MessageData{Name: "Weather"},
 		Pressure:    float64(data[0]),
 		Temperature: float64(data[1]),
 	}
@@ -29,3 +31,5 @@ func NewWeatherMessage(data []float32) WeatherMessage {
 func (m WeatherMessage) Type() uint {
 	return WeatherMessageType
 }
+
+func (m WeatherMessage) GetName() string { return m.Name }

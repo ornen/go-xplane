@@ -15,6 +15,7 @@
 package messages
 
 type PitchRollHeadingMessage struct {
+	MessageData
 	Pitch           float64
 	Roll            float64
 	HeadingTrue     float64
@@ -23,6 +24,7 @@ type PitchRollHeadingMessage struct {
 
 func NewPitchRollHeadingMessage(data []float32) PitchRollHeadingMessage {
 	return PitchRollHeadingMessage{
+		MessageData:     MessageData{Name: "PitchRollHeading"},
 		Pitch:           float64(data[0]),
 		Roll:            float64(data[1]),
 		HeadingTrue:     float64(data[2]),
@@ -33,3 +35,5 @@ func NewPitchRollHeadingMessage(data []float32) PitchRollHeadingMessage {
 func (m PitchRollHeadingMessage) Type() uint {
 	return PitchRollHeadingMessageType
 }
+
+func (m PitchRollHeadingMessage) GetName() string { return m.Name }

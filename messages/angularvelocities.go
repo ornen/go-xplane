@@ -15,6 +15,7 @@
 package messages
 
 type AngularVelocitiesMessage struct {
+	MessageData
 	X float64
 	Y float64
 	Z float64
@@ -22,12 +23,14 @@ type AngularVelocitiesMessage struct {
 
 func NewAngularVelocitiesMessage(data []float32) AngularVelocitiesMessage {
 	return AngularVelocitiesMessage{
-		X: float64(data[1]),
-		Y: float64(data[0]),
-		Z: float64(data[2]),
+		MessageData: MessageData{Name: "AngularVelocities"},
+		X:           float64(data[1]),
+		Y:           float64(data[0]),
+		Z:           float64(data[2]),
 	}
 }
 
 func (m AngularVelocitiesMessage) Type() uint {
 	return AngularVelocitiesMessageType
 }
+func (m AngularVelocitiesMessage) GetName() string { return m.Name }

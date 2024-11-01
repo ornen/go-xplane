@@ -15,15 +15,21 @@
 package messages
 
 type PropRPMMessage struct {
-	RPM float64
+	MessageData
+	Prop1 float64
+	Prop2 float64
 }
 
 func NewPropRPMMessage(data []float32) PropRPMMessage {
 	return PropRPMMessage{
-		RPM: float64(data[0]),
+		MessageData: MessageData{Name: "PropRPM"},
+		Prop1:       float64(data[0]),
+		Prop2:       float64(data[1]),
 	}
 }
 
 func (m PropRPMMessage) Type() uint {
 	return PropRPMMessageType
 }
+
+func (m PropRPMMessage) GetName() string { return m.Name }
