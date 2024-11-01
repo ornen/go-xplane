@@ -106,6 +106,8 @@ func (x *XPlane) parse(sentence []byte) {
 	binary.Read(messageBuffer, binary.LittleEndian, &messageData)
 
 	switch messageType {
+	case messages.AircraftPointWeatherPrecipWindType:
+		x.Messages <- messages.NewAircraftPointWeatherPrecipWind(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
