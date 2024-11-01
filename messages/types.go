@@ -47,6 +47,7 @@ const (
 	BatteryVoltageMessageType          = 54
 	FuelWeightsType                    = 62
 	WeightAndBalanceType               = 63
+	PropellerTorqueType                = 145
 	AircraftPointWeatherTempPressType  = 151
 	AircraftPointWeatherPrecipWindType = 152
 	AircraftRunwayConditionsType       = 153
