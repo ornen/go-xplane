@@ -108,6 +108,8 @@ func (x *XPlane) parse(sentence []byte) {
 	switch messageType {
 	case messages.AircraftPointWeatherPrecipWindType:
 		x.Messages <- messages.NewAircraftPointWeatherPrecipWind(messageData)
+	case messages.AircraftPointWeatherTempPressType:
+		x.Messages <- messages.NewAircraftPointWeatherTempPress(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
