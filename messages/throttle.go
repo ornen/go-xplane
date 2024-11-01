@@ -14,10 +14,6 @@
 
 package messages
 
-const (
-	ThrottleCommandMessageType = 25
-)
-
 type ThrottleCommandMessage struct {
 	Throttle float64
 }
