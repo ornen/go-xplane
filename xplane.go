@@ -118,6 +118,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewEngineThrust(messageData)
 	case messages.EngineTorqueType:
 		x.Messages <- messages.NewEngineTorque(messageData)
+	case messages.FrameRateType:
+		x.Messages <- messages.NewFrameRate(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
