@@ -50,5 +50,5 @@ const (
 	PropellerTorqueType                = 145
 	AircraftPointWeatherTempPressType  = 151
 	AircraftPointWeatherPrecipWindType = 152
-	AircraftRunwayConditionsType       = 153
+	AircraftRunwayConditionsType       = 166
 )
