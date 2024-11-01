@@ -126,6 +126,8 @@ func (x *XPlane) parse(sentence []byte) {
 		x.Messages <- messages.NewFuelPressure(messageData)
 	case messages.FuelWeightsType:
 		x.Messages <- messages.NewFuelWeights(messageData)
+	case messages.N1Type:
+		x.Messages <- messages.NewN1(messageData)
 	case messages.SpeedMessageType:
 		x.Messages <- messages.NewSpeedMessage(messageData)
 	case messages.GLoadMessageType:
